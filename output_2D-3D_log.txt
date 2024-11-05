@@ -1,0 +1,174 @@
+fx: 2805.78
+fy: 2802.63
+cx: 2026.51
+cy: 1496.88
+
+shoulder_len: 35 cm
+waist_len: 23 cm
+shoulder_to_waist_len: 25.0 cm
+
+key_point:
+[479.45, -1219.49]
+[672.51, -1216.56]
+[523.33, -1485.67]
+[634.48, -1485.67]
+
+puppet_uv:
+[-17.5  25.    1. ]
+[17.5 25.   1. ]
+[-11.5   0.    1. ]
+[11.5  0.   1. ]
+
+
+--- 最適化結果 ---
+完了した理由：CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH
+結果：True
+最適化の状態(0が成功): 0
+目的関数の値：26.236538974435835
+最適化されたパラメータ： [ -79.82468588 -123.15769758 -128.28277685 -169.70751161 -353.33053245
+  333.39088675]
+反復回数： 97
+勾配： [ 0.54024232 -1.71318285  1.81495315 -6.68232832  9.34011096  4.69389133]
+目的関数が評価された回数： 1729
+勾配が評価された回数： 247
+曲率（逆ヘッセ行列）: <6x6 LbfgsInvHessProduct with dtype=float64>
+カメラと被写体の距離: 3.33 m
+
+
+fx: 2805.78
+fy: 2802.63
+cx: 2026.51
+cy: 1496.88
+
+shoulder_len: 35 cm
+waist_len: 23 cm
+shoulder_to_waist_len: 25.0 cm
+
+key_point:
+[479.45, -1219.49]
+[672.51, -1216.56]
+[523.33, -1485.67]
+[634.48, -1485.67]
+
+puppet_uv:
+[-17.5  25.    1. ]
+[17.5 25.   1. ]
+[-11.5   0.    1. ]
+[11.5  0.   1. ]
+
+
+--- 最適化結果 ---
+完了した理由：CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH
+結果：True
+最適化の状態(0が成功): 0
+目的関数の値：26.236538974435835
+最適化されたパラメータ： [ -79.82468588 -123.15769758 -128.28277685 -169.70751161 -353.33053245
+  333.39088675]
+反復回数： 97
+勾配： [ 0.54024232 -1.71318285  1.81495315 -6.68232832  9.34011096  4.69389133]
+目的関数が評価された回数： 1729
+勾配が評価された回数： 247
+曲率（逆ヘッセ行列）: <6x6 LbfgsInvHessProduct with dtype=float64>
+カメラと被写体の距離: 3.33 m
+
+fx: 2805.78
+fy: 2802.63
+cx: 2026.51
+cy: 1496.88
+
+shoulder_len: 35 cm
+waist_len: 23 cm
+shoulder_to_waist_len: 25.0 cm
+
+key_point:
+[479.45, -1219.49]
+[672.51, -1216.56]
+[523.33, -1485.67]
+[634.48, -1485.67]
+
+puppet_uv:
+[-17.5  25.    1. ]
+[17.5 25.   1. ]
+[-11.5   0.    1. ]
+[11.5  0.   1. ]
+
+
+--- 最適化結果 ---
+完了した理由：CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH
+結果：True
+最適化の状態(0が成功): 0
+目的関数の値：26.236538974435835
+最適化されたパラメータ： [ -79.82468588 -123.15769758 -128.28277685 -169.70751161 -353.33053245
+  333.39088675]
+反復回数： 97
+勾配： [ 0.54024232 -1.71318285  1.81495315 -6.68232832  9.34011096  4.69389133]
+目的関数が評価された回数： 1729
+勾配が評価された回数： 247
+曲率（逆ヘッセ行列）: <6x6 LbfgsInvHessProduct with dtype=float64>
+カメラと被写体の距離: 3.33 m
+
+
+
+再投影誤差: 1.8859343821421806
+カメラ行列: [[2.80577775e+03 0.00000000e+00 2.02650537e+03]
+ [0.00000000e+00 2.80262612e+03 1.49688192e+03]
+ [0.00000000e+00 0.00000000e+00 1.00000000e+00]]
+歪み: [[ 2.42955834e-01 -7.91773805e-01  5.10226291e-04 -1.46588389e-03
+   7.63258514e-01]]
+回転ベクトル:array[-1.22380565],
+
+
+
+[1]
+33 秒
+from google.colab import drive
+drive.mount('/content/drive')
+Mounted at /content/drive
+
+[3]
+0 秒
+# file_path = '/content/drive/MyDrive/Colab_Notebooks/hanaizumi_project/img_right/*.jpg'
+file_path = '/content/drive/MyDrive/Colab_Notebooks/hanaizumi_project/img_iphone_jpg/*.jpg'
+
+[4]
+1 秒
+import numpy as np
+import cv2
+import glob
+import matplotlib.pyplot as plt
+from PIL import Image
+from google.colab.patches import cv2_imshow
+
+# termination criteria
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
+
+# chessboard grid points
+cbrow = 7
+cbcol = 10
+
+# chsess 1size [m]
+chess_size = 0.095
+
+# prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
+objp = np.zeros((cbrow*cbcol,3), np.float32)
+objp[:,:2] = np.mgrid[0:cbcol,0:cbrow].T.reshape(-1,2)
+
+# Arrays to store object points and image points from all the images.
+objpoints = [] # 3d point in real world space
+imgpoints = [] # 2d points in image plane.
+
+images = glob.glob(file_path)
+編集するにはダブルクリックするか Enter キーを押してください
+
+
+[5]
+for fname in images:
+    img = cv2.imread(fname)
+    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+    # Find the chess board corners
+    ret, corners = cv2.findChessboardCorners(gray, (cbcol,cbrow),None)
+
+    # If found, add object points, image points (after refining them)
+    if ret == False:
+      print("見つけられませんでした"+ fname)

@@ -45,6 +45,7 @@ scaled_source_points = source_points * scaling_factor  # 拡大した点を計�
 initial_params = [0, 0]  # [tx, ty]
 result = minimize(objective_function, initial_params, args=(scaled_source_points, target_points_array))
 
+
 # 最適化結果を使って点を変換
 final_transformed_points = transform_points(scaled_source_points, result.x)
 
